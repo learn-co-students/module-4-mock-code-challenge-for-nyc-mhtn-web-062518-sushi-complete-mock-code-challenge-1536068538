@@ -1,19 +1,42 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import MoreButton from '../components/MoreButton'
+import Sushi from '../components/Sushi'
 
-const SushiContainer = (props) => {
-  return (
-    <Fragment>
-      <div className="belt">
-        {
-          /* 
-             Render Sushi components here!
-          */
-        }
-        <MoreButton />
-      </div>
-    </Fragment>
-  )
+const URL = 'http://localhost:3000/sushis'
+
+class SushiContainer extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      sushis: [],
+      sushiIndex: 0
+    }
+  }
+
+  componentDidMount(){
+    fetch(URL)
+      .then(r=>r.json())
+      .then(data=>this.setState({sushis:[...data]}))
+  }
+
+  handleClick = () => {
+    this.setState(...this.state, {sushiIndex: this.state.sushiIndex+4})
+  }
+
+  render(){
+    // console.log(this.state.sushis)
+    return (
+      <Fragment>
+        <div className="belt">
+          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex]}/>
+          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+1]}/>
+          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+2]}/>
+          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+3]}/>
+          <MoreButton handleClick={this.handleClick}/>
+        </div>
+      </Fragment>
+    )
+  }
 }
 
 export default SushiContainer
