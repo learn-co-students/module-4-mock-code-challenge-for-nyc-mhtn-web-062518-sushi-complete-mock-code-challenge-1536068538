@@ -7,7 +7,7 @@ const Sushi = (props) => {
       <div className="plate"
            onClick={props.handleSushiClick}>
         {
-          /* Tell me if this sushi has been eaten! */
+
           true ?
           <img src={props.sushi ? `${props.sushi.img_url}` : null} width="100%" />
 

@@ -19,6 +19,7 @@ class SushiContainer extends Component {
       .then(data=>this.setState({sushis:[...data]}))
   }
 
+
   handleClick = () => {
     this.setState(...this.state, {sushiIndex: this.state.sushiIndex+4})
   }
@@ -28,10 +29,10 @@ class SushiContainer extends Component {
     return (
       <Fragment>
         <div className="belt">
-          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex]}/>
-          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+1]}/>
-          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+2]}/>
-          <Sushi handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+3]}/>
+          <Sushi key={this.state.sushiIndex} handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex]}/>
+          <Sushi key={this.state.sushiIndex+1} handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+1]}/>
+          <Sushi key={this.state.sushiIndex+2} handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+2]}/>
+          <Sushi key={this.state.sushiIndex+3} handleSushiClick={this.props.handleSushiClick} sushi={this.state.sushis[this.state.sushiIndex+3]}/>
           <MoreButton handleClick={this.handleClick}/>
         </div>
       </Fragment>

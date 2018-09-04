@@ -7,21 +7,32 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      balance: 100
+      balance: 100,
+      plateArray: []
     }
   }
 
   handleSushiClick = (e) => {
-    e.target.style.visibility = 'hidden'
     const price = parseInt(e.target.parentElement.nextElementSibling.innerText.split('-').slice(-1))
-    this.setState({balance: this.state.balance - price});
+    if (this.state.balance > price){
+      e.target.style.visibility = 'hidden'
+
+        this.setState({balance: this.state.balance - price});
+
+      this.setState(prevState => ({
+        plateArray: [
+          ...prevState.plateArray,
+          1
+        ]
+    }))
+  }
   }
 
   render() {
     return (
       <div className="app">
         <SushiContainer  handleSushiClick={this.handleSushiClick}/>
-        <Table handleSushiClick={this.handleSushiClick} balance={this.state.balance}/>
+        <Table plateArray={this.state.plateArray} balance={this.state.balance}/>
       </div>
     );
   }

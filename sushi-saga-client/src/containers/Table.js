@@ -21,7 +21,7 @@ class Table extends Component {
         <div className="table">
           <div className="stack">
             {
-              renderPlates([1,2])
+              renderPlates(this.props.plateArray)
             }
           </div>
         </div>
